@@ -8,6 +8,12 @@ variable "name" {
   description = "Name of the project which uses this module. Resource names will be prefixed with this value."
 }
 
+variable "ssm_prefix" {
+  type        = string
+  description = "Prefix for parameter names. Can be used to setup hierachies e.g. `/my-name/`."
+  default     = null
+}
+
 variable "s3_bucket_name" {
   type        = string
   description = "Name of the existing S3 bucket to protect."
