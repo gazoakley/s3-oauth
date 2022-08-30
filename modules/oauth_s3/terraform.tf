@@ -5,6 +5,7 @@ terraform {
     aws = {
       source  = "hashicorp/aws"
       version = "~> 3.18"
+      configuration_aliases = [ aws.s3_bucket ]
     }
 
     random = {
