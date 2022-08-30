@@ -1,5 +1,6 @@
 data "aws_s3_bucket" "subject" {
-  bucket = var.s3_bucket_name
+  provider = aws.s3_bucket
+  bucket   = var.s3_bucket_name
 }
 
 data "aws_iam_policy_document" "allow_cloudfront_oai_read_s3_bucket" {
@@ -16,7 +17,8 @@ data "aws_iam_policy_document" "allow_cloudfront_oai_read_s3_bucket" {
 }
 
 resource "aws_s3_bucket_policy" "allow_cloudfront_oai_read_s3_bucket" {
-  count = var.s3_bucket_policy_enabled ? 1 : 0
+  provider = aws.s3_bucket
+  count    = var.s3_bucket_policy_enabled ? 1 : 0
 
   bucket = data.aws_s3_bucket.subject.id
   policy = data.aws_iam_policy_document.allow_cloudfront_oai_read_s3_bucket.json

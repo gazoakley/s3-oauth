@@ -51,7 +51,7 @@ resource "aws_cloudfront_distribution" "auth" {
   }
 
   viewer_certificate {
-    cloudfront_default_certificate = var.cloudfront_alias
+    cloudfront_default_certificate = var.cloudfront_acm_certificate_arn == null
     acm_certificate_arn            = var.cloudfront_acm_certificate_arn
     minimum_protocol_version       = var.cloudfront_acm_certificate_arn != null ? "TLSv1.2_2021" : null
     ssl_support_method             = var.cloudfront_acm_certificate_arn != null ? "sni-only" : null
