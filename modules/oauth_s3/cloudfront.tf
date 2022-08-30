@@ -1,5 +1,5 @@
 resource "aws_cloudfront_distribution" "auth" {
-  aliases = var.cloudfront_alias != "" ? [var.cloudfront_alias] : []
+  aliases = var.cloudfront_alias != null ? [var.cloudfront_alias] : []
 
   origin {
     domain_name = data.aws_s3_bucket.subject.bucket_regional_domain_name
