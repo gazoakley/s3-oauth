@@ -3,6 +3,6 @@ resource "random_password" "jwt_secret" {
 
   upper   = true
   lower   = true
-  number  = true
+  numeric = true
   special = true
 }

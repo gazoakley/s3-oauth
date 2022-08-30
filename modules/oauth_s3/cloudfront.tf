@@ -6,7 +6,7 @@ resource "aws_cloudfront_distribution" "auth" {
     origin_id   = local.s3_origin_id
 
     s3_origin_config {
-      origin_access_identity = aws_cloudfront_origin_access_identity.auth.cloudfront_access_identity_path
+      origin_access_identity = data.aws_cloudfront_origin_access_identity.auth.cloudfront_access_identity_path
     }
   }
 
@@ -59,4 +59,9 @@ resource "aws_cloudfront_distribution" "auth" {
 }
 
 resource "aws_cloudfront_origin_access_identity" "auth" {
+  count = var.cloudfront_origin_access_identity == null ? 1 : 0
+}
+
+data "aws_cloudfront_origin_access_identity" "auth" {
+  id = var.cloudfront_origin_access_identity != null ? var.cloudfront_origin_access_identity : aws_cloudfront_origin_access_identity.auth[0].id
 }

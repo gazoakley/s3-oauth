@@ -1,9 +1,9 @@
 locals {
-  project      = "${var.project}-s3-oauth"
+  project      = "${var.name}-s3-oauth"
   s3_origin_id = local.project
 }
 
-variable "project" {
+variable "name" {
   type        = string
   description = "Name of the project which uses this module. Resource names will be prefixed with this value."
 }
@@ -16,6 +16,18 @@ variable "s3_bucket_name" {
 variable "s3_bucket_default_root_object" {
   type        = string
   description = "Default object to serve when no path is specified in the request."
+}
+
+variable "s3_bucket_policy_enabled" {
+  type        = bool
+  description = "Creates an S3 bucket policy for the bucket."
+  default     = true
+}
+
+variable "cloudfront_origin_access_identity" {
+  type        = string
+  description = "The CloudFront origin access identity to associate with the origin."
+  default     = null
 }
 
 variable "cloudfront_alias" {
